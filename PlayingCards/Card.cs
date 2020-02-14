@@ -1,51 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PlayingCards
 {
-<<<<<<< HEAD
-    [Flags]
-    public enum CardColor
-    {
-        Clubs,
-        Diamonds,
-        Hearts,
-        Spades
-    }
-
-    [Flags]
-    public enum CardValue
-    {
-        Two = 2,
-        Three,
-        Four,
-        Five,
-        Six,
-        Seven,
-        Eight,
-        Nine,
-        Ten,
-        Jack,
-        Queen,
-        King,
-        Ace
-    }
-
-    [Flags]
-    public enum CardType
-    {
-        Red = 0x1,
-        Black = 0x2,
-        Head = 0x4,
-        Number = 0x8
-    }
-
-    public class Card : IComparable<Card>
-    {
-
-
-=======
     public enum CardColor
     {
         Clubs,
@@ -70,6 +26,7 @@ namespace PlayingCards
         King,
         Ace
     }
+
     /// <summary>
     /// characteristics of the card
     /// </summary>
@@ -83,11 +40,16 @@ namespace PlayingCards
         Number = 0x8
     }
 
-    public class Card : IComparable<Card>
+    public class Card : IComparable<Card>, IEquatable<Card>
     {
->>>>>>> cfa05a79c4582612be373748db255b3ccc5982f8
-        public CardColor Color { get; set; }
-        public CardValue Value { get; set; }
+        public Card(CardColor color, CardValue value)
+        {
+            Color = color;
+            Value = value;
+        }
+
+        public CardColor Color { get; }
+        public CardValue Value { get; }
 
         public CardType Type
         {
@@ -96,58 +58,82 @@ namespace PlayingCards
                 var isRed = (Color == CardColor.Diamonds) || (Color == CardColor.Hearts);
                 var isHead = Value >= CardValue.Jack;
 
-<<<<<<< HEAD
-                return (isRed ? CardType.Red : CardType.Black) | (isHead ? CardType.Head : CardType.Number);
-=======
                 return (isRed ? CardType.Red : CardType.Black) | (isHead ? CardType.Heads : CardType.Number);
->>>>>>> cfa05a79c4582612be373748db255b3ccc5982f8
             }
         }
+
+        public bool IsRed => (Color == CardColor.Diamonds) || (Color == CardColor.Hearts);
+        public bool IsHead => Value >= CardValue.Jack;
 
         public int CompareTo(Card secondCard)
         {
-<<<<<<< HEAD
-            if(secondCard.Value > Value)
+            if (secondCard == null)
             {
                 return 1;
             }
-            else if(secondCard.Value < Value)
-=======
-            if (secondCard.Value > Value)
+
+            var valueComparison = Value.CompareTo(secondCard.Value);
+            if (valueComparison != 0)
             {
-                return 1;
-            }
-            else if (secondCard.Value < Value)
->>>>>>> cfa05a79c4582612be373748db255b3ccc5982f8
-            {
-                return -1;
+                return valueComparison;
             }
             else
             {
-<<<<<<< HEAD
-                if(secondCard.Color > Color)
-                {
-                    return 1;
-                }
-                else if(secondCard.Color < Color)
-=======
-                if (secondCard.Color > Color)
-                {
-                    return 1;
-                }
-                else if (secondCard.Color < Color)
->>>>>>> cfa05a79c4582612be373748db255b3ccc5982f8
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 0;
-                }
+                return Color.CompareTo(secondCard.Color);
             }
-
         }
 
         public override string ToString() => $"{Value} of {Color}";
+
+        public bool Equals(Card other) => CompareTo(other) == 0;
+
+        public override int GetHashCode()
+        {
+            return 4 * (int)Value + (int)Color;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Card;
+            if (other != null)
+            {
+                return Equals(other);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool operator ==(Card first, Card second) => object.ReferenceEquals(first, second) || (first?.Equals(second) ?? false);
+
+        public static bool operator !=(Card first, Card second) => !(first == second);
+
+        public static bool operator >(Card first, Card second)
+        {
+            if (first == null)
+            {
+                return false;
+            }
+            else
+            {
+                return first.CompareTo(second) > 0;
+            }
+        }
+
+        public static bool operator <(Card first, Card second)
+        {
+            if (first == null)
+            {
+                return second != null;
+            }
+            else
+            {
+                return first.CompareTo(second) < 0;
+            }
+        }
+
+        public static bool operator >=(Card first, Card second) => !(first < second);
+        public static bool operator <=(Card first, Card second) => !(first > second);
     }
 }
