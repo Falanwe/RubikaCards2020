@@ -11,6 +11,7 @@ namespace PlayingCardsConsole
             var dealer = new CardDealer();
             dealer.Initialize();
             dealer.Shuffle();
+            //dealer.Display();
 
             Card firstCard = dealer.DealOne();
             Card secondCard = dealer.DealOne();
