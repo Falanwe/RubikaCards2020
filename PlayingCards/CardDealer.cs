@@ -12,7 +12,7 @@ namespace PlayingCards
         {
             for (int i = 0; i < 4; i++)
             {
-                for (int t = 0; t < 13; t++)
+                for (int t = 1; t < 14; t++)
                 {
                     Card card = new Card((Suit)i, t);
                     cards.Add(card);

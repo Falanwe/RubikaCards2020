@@ -25,14 +25,37 @@ namespace PlayingCards
 
         public string GetName()
         {
-            return suit.ToString() + " " + rank;
+            string s = suit.ToString();
+            string suffix = "of " + s;
+            string baseName = rank + " " + suffix;
+
+            switch (rank)
+            {
+                case 1:
+                    baseName = "Ace " + suffix;
+                    break;
+
+                case 11:
+                    baseName = "Jack " + suffix;
+                    break;
+
+                case 12:
+                    baseName = "Queen " + suffix;
+                    break;
+
+                case 13:
+                    baseName = "King " + suffix;
+                    break;
+            }
+
+            return "The " + baseName;
         }
 
         public string CompareTo(Card otherCard)
         {
             string result = GetName() + " is";
-            int rankA = rank;
-            int rankB = otherCard.rank;
+            int rankA = ConvertRank(rank);
+            int rankB = ConvertRank(otherCard.rank);
 
             if (rankA > rankB) result += " greater than ";
             else if (rankA < rankB) result += " less than ";
@@ -40,6 +63,16 @@ namespace PlayingCards
 
             result += otherCard.GetName();
             return result;
+        }
+
+        public int ConvertRank(int rank)
+        {
+            if(rank == 1)
+            {
+                rank = 14;
+            }
+
+            return rank;
         }
     }
 }
