@@ -16,9 +16,6 @@ namespace PlayingCards
             Reset();
         }
 
-
-
-
         public void Shuffle(ICardShuffler shuffler)
         {
             shuffler.Shuffle(this);
