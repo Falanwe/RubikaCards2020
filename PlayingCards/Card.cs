@@ -4,6 +4,48 @@ using System.Text;
 
 namespace PlayingCards
 {
+<<<<<<< HEAD
+    [Flags]
+    public enum CardColor
+    {
+        Clubs,
+        Diamonds,
+        Hearts,
+        Spades
+    }
+
+    [Flags]
+    public enum CardValue
+    {
+        Two = 2,
+        Three,
+        Four,
+        Five,
+        Six,
+        Seven,
+        Eight,
+        Nine,
+        Ten,
+        Jack,
+        Queen,
+        King,
+        Ace
+    }
+
+    [Flags]
+    public enum CardType
+    {
+        Red = 0x1,
+        Black = 0x2,
+        Head = 0x4,
+        Number = 0x8
+    }
+
+    public class Card : IComparable<Card>
+    {
+
+
+=======
     public enum CardColor
     {
         Clubs,
@@ -41,8 +83,9 @@ namespace PlayingCards
         Number = 0x8
     }
 
-    public class Card : IComparable<Card> , IEquatable<Card>
+    public class Card : IComparable<Card>
     {
+>>>>>>> cfa05a79c4582612be373748db255b3ccc5982f8
         public CardColor Color { get; set; }
         public CardValue Value { get; set; }
 
@@ -53,38 +96,58 @@ namespace PlayingCards
                 var isRed = (Color == CardColor.Diamonds) || (Color == CardColor.Hearts);
                 var isHead = Value >= CardValue.Jack;
 
+<<<<<<< HEAD
+                return (isRed ? CardType.Red : CardType.Black) | (isHead ? CardType.Head : CardType.Number);
+=======
                 return (isRed ? CardType.Red : CardType.Black) | (isHead ? CardType.Heads : CardType.Number);
+>>>>>>> cfa05a79c4582612be373748db255b3ccc5982f8
             }
         }
 
         public int CompareTo(Card secondCard)
         {
-            //var valueComparison = Value.CompareTo(secondCard.Value);
-            //if (valueComparison !=0)
-            //{
-            //    return valueComparison;
-            //}
-            //else
-            //{
-            //    return Color.CompareTo(secondCard.Color);
-            //}
+<<<<<<< HEAD
+            if(secondCard.Value > Value)
+            {
+                return 1;
+            }
+            else if(secondCard.Value < Value)
+=======
+            if (secondCard.Value > Value)
+            {
+                return 1;
+            }
+            else if (secondCard.Value < Value)
+>>>>>>> cfa05a79c4582612be373748db255b3ccc5982f8
+            {
+                return -1;
+            }
+            else
+            {
+<<<<<<< HEAD
+                if(secondCard.Color > Color)
+                {
+                    return 1;
+                }
+                else if(secondCard.Color < Color)
+=======
+                if (secondCard.Color > Color)
+                {
+                    return 1;
+                }
+                else if (secondCard.Color < Color)
+>>>>>>> cfa05a79c4582612be373748db255b3ccc5982f8
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
 
-            return (4 * (int)Value + (int)Color - (4 * (int)secondCard.Value + (int)secondCard.Color));
-        }
-
-        public bool Equals(Card other)
-        {
-            //throw new NotImplementedException();
         }
 
         public override string ToString() => $"{Value} of {Color}";
-
-        public static bool operator <(Card first , Card second)
-        {
-            //if (first)
-            //{
-
-            //}
-        }
     }
 }
