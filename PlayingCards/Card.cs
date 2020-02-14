@@ -4,55 +4,73 @@ using System.Text;
 
 namespace PlayingCards
 {
+    public enum CardColor
+    {
+        Clubs,
+        Diamonds,
+        Hearts,
+        Spades
+    }
+
+    public enum CardValue
+    {
+        Two = 2,
+        Three,
+        Four,
+        Five,
+        Six,
+        Seven,
+        Eight,
+        Nine,
+        Ten,
+        Jack,
+        Queen,
+        King,
+        Ace
+    }
+
+    [Flags]
+    public enum CardType
+    {
+        Red = 0x1,
+        Black = 0x2,
+        Heads = 0x4,
+        Number = 0x8
+    }
+
     public class Card : IComparable<Card>
     {
-        public enum CardColor
+        public CardColor Color { get; set; }
+        public CardValue Value { get; set; }
+
+        public CardType Type
         {
-            Clubs,
-            Diamonds,
-            Hearts,
-            Spades
+            get
+            {
+                var isRed = (Color == CardColor.Diamonds) || (Color == CardColor.Hearts);
+                var isHead = Value >= CardValue.Jack;
+
+                return (isRed ? CardType.Red : CardType.Black) | (isHead ? CardType.Heads : CardType.Number);
+            }
         }
-
-        public enum CardValue
-        {
-            Two = 2,
-            Three,
-            Four,
-            Five,
-            Six,
-            Seven,
-            Eight,
-            Nine,
-            Ten,
-            Jack,
-            Queen,
-            King,
-            Ace
-        }
-
-        public CardColor color;
-        public CardValue value;
-
-
 
         public int CompareTo(Card secondCard)
         {
-            if(secondCard.value > value)
+            if (secondCard.Value > Value)
             {
                 return 1;
             }
-            else if(secondCard.value < value)
+            else if (secondCard.Value < Value)
             {
                 return -1;
             }
             else
             {
-                if(secondCard.color > color)
+                if (secondCard.Color > Color)
                 {
                     return 1;
                 }
-                else if(secondCard.color < color)
+                else if (secondCard.Color < Color)
                 {
                     return -1;
                 }
@@ -63,5 +81,7 @@ namespace PlayingCards
             }
 
         }
+
+        public override string ToString() => $"{Value} of {Color}";
     }
 }
