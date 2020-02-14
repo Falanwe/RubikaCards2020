@@ -35,6 +35,19 @@ namespace PlayingCards
             Ace = 14
         }
 
+        /// <summary>
+        /// characteristics of the card
+        /// </summary>
+        /// <remarks>Too many flags for the sake of demonstration</remarks>
+        [Flags]
+        public enum CardType
+        {
+            Red = 0x1,
+            Black = 0x2,
+            Heads = 0x4,
+            Number = 0x8
+        }
+
         public CardColorType CardColor { get; private set; }
         public CardValueType CardValue { get; private set; }
         public bool IsNullCard                                                                      //Util?
@@ -43,7 +56,18 @@ namespace PlayingCards
             {
                 return (CardColor == CardColorType.None || CardValue == CardValueType.None);
             }
-        } 
+        }
+
+        public CardType Type
+        {
+            get
+            {
+                var isRed = (CardColor == CardColorType.Diamonds) || (CardColor == CardColorType.Hearts);
+                var isHead = CardValue >= CardValueType.Jack;
+
+                return (isRed ? CardType.Red : CardType.Black) | (isHead ? CardType.Heads : CardType.Number);
+            }
+        }
 
         public Card(CardColorType cardColor, CardValueType cardValue)
         {
