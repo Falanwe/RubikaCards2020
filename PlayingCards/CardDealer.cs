@@ -20,8 +20,6 @@ namespace PlayingCards
 
             return newCard;
         }
-
-
     }
 
 

@@ -41,7 +41,7 @@ namespace PlayingCards
         Number = 0x8
     }
 
-    public class Card : IComparable<Card>
+    public class Card : IComparable<Card> , IEquatable<Card>
     {
         public CardColor Color { get; set; }
         public CardValue Value { get; set; }
@@ -59,32 +59,32 @@ namespace PlayingCards
 
         public int CompareTo(Card secondCard)
         {
-            if (secondCard.Value > Value)
-            {
-                return 1;
-            }
-            else if (secondCard.Value < Value)
-            {
-                return -1;
-            }
-            else
-            {
-                if (secondCard.Color > Color)
-                {
-                    return 1;
-                }
-                else if (secondCard.Color < Color)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
+            //var valueComparison = Value.CompareTo(secondCard.Value);
+            //if (valueComparison !=0)
+            //{
+            //    return valueComparison;
+            //}
+            //else
+            //{
+            //    return Color.CompareTo(secondCard.Color);
+            //}
 
+            return (4 * (int)Value + (int)Color - (4 * (int)secondCard.Value + (int)secondCard.Color));
+        }
+
+        public bool Equals(Card other)
+        {
+            //throw new NotImplementedException();
         }
 
         public override string ToString() => $"{Value} of {Color}";
+
+        public static bool operator <(Card first , Card second)
+        {
+            //if (first)
+            //{
+
+            //}
+        }
     }
 }

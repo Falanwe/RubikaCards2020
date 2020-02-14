@@ -6,6 +6,7 @@ namespace PlayingCardsConsole
 {
     class Program
     {
+
         static void Main(string[] args)
         {
             var dealer = new CardDealer();
@@ -22,6 +23,9 @@ namespace PlayingCardsConsole
             Console.WriteLine($"{firstCard} is { ((type & CardType.Black) == CardType.Black ? "" : "not ") }black.");
             Console.WriteLine($"{firstCard} is { (type.HasFlag(CardType.Heads) ? "" : "not ") }a head.");
             Console.WriteLine($"{firstCard} is { (type.HasFlag(CardType.Number) ? "" : "not ") }a number.");
+
+                     
+
 
         }
     }
