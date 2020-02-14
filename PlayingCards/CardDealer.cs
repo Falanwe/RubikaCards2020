@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using PlayingCards;
 
 namespace PlayingCardsConsole
 {
@@ -21,20 +22,13 @@ namespace PlayingCardsConsole
 
         public void Shuffle()
         {
-
-
-
         }
 
-        public CardDealer DealOne()
+        public Card DealOne()
         {
-            return this;
+            return new Card();
         }
 
-        public int CompareTo(CardDealer cardToCompare)
-        {
-            return 0;
-        }
 
     }
 }
