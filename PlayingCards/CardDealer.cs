@@ -10,12 +10,14 @@ namespace PlayingCards
 
         public void Shuffle()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public Card DealOne()
         {
-            throw new NotImplementedException();
+            return new Card();
+
+           // throw new NotImplementedException();
         }
     }
 }
