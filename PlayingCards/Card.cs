@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PlayingCards
 {
-    public class Card : IComparable<Card>
+    public class Card : IComparable<Card>, IEquatable<Card>
     {
         public enum CardColor
         {
@@ -48,8 +48,8 @@ namespace PlayingCards
             Number = 0x8
         }
 
-        public CardColor Color { get; private set; }
-        public CardValue Value { get; private set; }
+        public CardColor Color { get; /*private set;*/ }
+        public CardValue Value { get; /*private set;*/ }
         public bool IsNullCard                                                                      //Util?
         {
             get
@@ -82,19 +82,66 @@ namespace PlayingCards
             Value = (CardValue)randomGenerator.Next(2, 15);
         }
 
-        public override string ToString()
-        {
-            return Value.ToString() + " of " + Color.ToString();
-        }
+        //public override string ToString()
+        //{
+        //    return Value.ToString() + " of " + Color.ToString();
+        //}
+
+        public override string ToString() => Value + " of " + Color;
+
+        public bool Equals(Card other) => CompareTo(other) == 0;
+        //public bool Equals(Card other) => Color == other.Color && Value == other.Value;
 
         public int CompareTo(Card other)
         {
+            if(other == null)
+            {
+                return 1;
+            }
+
             if ((int)Value == (int)other.Value)
             {
                 return (int)Color - (int)other.Color;
             }
             else
                 return (int)Value - (int)other.Value;
+
+            //OtherSolution
+            // return 4 * ((int)Value - (int) other.Value) + (int)Color - (int)other.Color;
         }
+
+        //public static bool operator ==(Card first, Card second)
+        //{
+        //    if (first == null)
+        //        return second == null;
+        //    else
+        //        return first.Equals(second);
+        //}
+
+        public static bool operator ==(Card first, Card second) => object.ReferenceEquals(first, second) || (first?.Equals(second) ?? false);           // l'operateur ?? remplace la partie droite par la partie gauche si la partie droite est null 
+
+        public static bool operator !=(Card first, Card second) => !(first == second);
+
+        //public static bool operator <(Card first, Card second) => first?.CompareTo(second) < 0;         //Lifted operator if null
+        //public static bool operator >(Card first, Card second) => first?.CompareTo(second) > 0;         //Lifted operator if null
+
+        public static bool operator <(Card first, Card second)
+        {
+            if (first == null)
+                return second != null;
+            else
+                return first.CompareTo(second) < 0;
+        }
+
+        public static bool operator >(Card first, Card second)
+        {
+            if (first == null)
+                return false;
+            else
+                return first.CompareTo(second) > 0;
+        }
+
+        public static bool operator <=(Card first, Card second) => !(first > second);
+        public static bool operator >=(Card first, Card second) => !(first < second);
     }
 }

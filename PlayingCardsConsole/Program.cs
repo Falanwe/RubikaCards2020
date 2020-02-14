@@ -15,7 +15,7 @@ namespace PlayingCardsConsole
             var firstCard = dealer.DealOne();
             var secondCard = dealer.DealOne();
 
-            Console.WriteLine($"First card ({firstCard}) is {(firstCard.CompareTo(secondCard) > 0 ? "greater" : "smaller")} than second card ({secondCard}).");
+            Console.WriteLine($"First card ({firstCard}) is {(firstCard == secondCard ? "" : "not")} equal to second card ({secondCard}).");
         }
     }
 }
