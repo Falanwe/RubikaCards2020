@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PlayingCardsConsole
+namespace PlayingCards
 {
     public class Card : IComparable<Card>
     {
@@ -36,23 +36,23 @@ namespace PlayingCardsConsole
 
 
 
-        public int CompareTo(Card other)
+        public int CompareTo(Card secondCard)
         {
-            if(other.value > value)
+            if(secondCard.value > value)
             {
                 return 1;
             }
-            else if(other.value < value)
+            else if(secondCard.value < value)
             {
                 return -1;
             }
             else
             {
-                if(other.color > color)
+                if(secondCard.color > color)
                 {
                     return 1;
                 }
-                else if(other.color < color)
+                else if(secondCard.color < color)
                 {
                     return -1;
                 }

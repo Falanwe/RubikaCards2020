@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PlayingCardsConsole
+namespace PlayingCards
 {
     public class CardDealer
     {
