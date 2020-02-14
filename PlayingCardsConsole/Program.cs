@@ -1,6 +1,7 @@
 ﻿using System;
 using PlayingCards;
 
+
 namespace PlayingCardsConsole
 {
     class Program
@@ -14,7 +15,14 @@ namespace PlayingCardsConsole
             var firstCard = dealer.DealOne();
             var secondCard = dealer.DealOne();
 
-            Console.WriteLine($"First card ({firstCard.MyColor.ToString() +" "+ firstCard.MyValue.ToString()}) is {(firstCard.CompareTo(secondCard) > 0 ? "greater" : "smaller")} than second card ({secondCard.MyColor.ToString() +" "+ secondCard.MyValue.ToString()}).");
+            Console.WriteLine($"First card ({firstCard}) is {(firstCard.CompareTo(secondCard) > 0 ? "greater" : "smaller")} than second card ({secondCard}).");
+
+            var type = firstCard.Type;
+            Console.WriteLine($"{firstCard} is { (type.HasFlag(CardType.Red) ? "" : "not ") }red.");
+            Console.WriteLine($"{firstCard} is { ((type & CardType.Black) == CardType.Black ? "" : "not ") }black.");
+            Console.WriteLine($"{firstCard} is { (type.HasFlag(CardType.Heads) ? "" : "not ") }a head.");
+            Console.WriteLine($"{firstCard} is { (type.HasFlag(CardType.Number) ? "" : "not ") }a number.");
+
         }
     }
 }

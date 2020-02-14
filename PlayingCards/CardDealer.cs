@@ -1,23 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace PlayingCards
 {
     public class CardDealer
     {
-        public CardDealer()
-        {
-        }
-
         public void Shuffle()
         {
-            //throw new NotImplementedException();
+
         }
 
         public Card DealOne()
         {
-            return new Card();
+            Card newCard = new Card();
+            Random rand = new Random();
+            newCard.Color = (CardColor)rand.Next(0, (int)CardColor.Spades + 1);
+            newCard.Value = (CardValue)rand.Next(2, (int)CardValue.Ace + 1);
 
-           // throw new NotImplementedException();
+            return newCard;
         }
+
+
     }
+
+
 }
