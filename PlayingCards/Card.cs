@@ -28,7 +28,10 @@ namespace PlayingCards
         King,
         Ace
     }
-
+    /// <summary>
+    /// characteristics of the card
+    /// </summary>
+    /// <remarks>Too many flags for the sake of demonstration</remarks>
     [Flags]
     public enum CardType
     {
