@@ -14,8 +14,8 @@ namespace PlayingCards
 
     public class Card
     {
-        public Suit suit;
-        public int rank;
+        private Suit suit;
+        private int rank;
 
         public Card(Suit suit, int rank)
         {
@@ -25,7 +25,7 @@ namespace PlayingCards
 
         public string GetName()
         {
-            string s = suit.ToString();
+            string s = suit.ToString() + "s";
             string suffix = "of " + s;
             string baseName = rank + " " + suffix;
 
