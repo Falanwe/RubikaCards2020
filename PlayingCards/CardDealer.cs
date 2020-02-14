@@ -15,8 +15,8 @@ namespace PlayingCards
         {
             Card newCard = new Card();
             Random rand = new Random();
-            newCard.color = (Card.CardColor)rand.Next(0, 4);
-            newCard.value = (Card.CardValue)rand.Next(2, 16);
+            newCard.Color = (CardColor)rand.Next(0, (int)CardColor.Spades + 1);
+            newCard.Value = (CardValue)rand.Next(2, (int)CardValue.Ace + 1);
 
             return newCard;
         }
