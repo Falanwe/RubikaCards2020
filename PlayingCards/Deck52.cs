@@ -55,7 +55,7 @@ namespace PlayingCards
             {
                 for(int value = 2; value < 15; value ++)
                 {
-                    deck.Add(new Card((Card.CardColorType)color, (Card.CardValueType)value));
+                    deck.Add(new Card((Card.CardColor)color, (Card.CardValue)value));
                 }
             }
         }

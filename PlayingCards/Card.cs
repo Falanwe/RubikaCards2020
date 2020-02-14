@@ -8,7 +8,7 @@ namespace PlayingCards
 {
     public class Card : IComparable<Card>
     {
-        public enum CardColorType
+        public enum CardColor
         {
             None = -1,
             Clubs = 1,
@@ -17,7 +17,7 @@ namespace PlayingCards
             Spades = 4
         }
 
-        public enum CardValueType
+        public enum CardValue
         {
             None = -1,
             Two = 2,
@@ -48,13 +48,13 @@ namespace PlayingCards
             Number = 0x8
         }
 
-        public CardColorType CardColor { get; private set; }
-        public CardValueType CardValue { get; private set; }
+        public CardColor Color { get; private set; }
+        public CardValue Value { get; private set; }
         public bool IsNullCard                                                                      //Util?
         {
             get
             {
-                return (CardColor == CardColorType.None || CardValue == CardValueType.None);
+                return (Color == CardColor.None || Value == CardValue.None);
             }
         }
 
@@ -62,39 +62,39 @@ namespace PlayingCards
         {
             get
             {
-                var isRed = (CardColor == CardColorType.Diamonds) || (CardColor == CardColorType.Hearts);
-                var isHead = CardValue >= CardValueType.Jack;
+                var isRed = (Color == CardColor.Diamonds) || (Color == CardColor.Hearts);
+                var isHead = (Value >= CardValue.Jack) && (Value < CardValue.Ace);
 
                 return (isRed ? CardType.Red : CardType.Black) | (isHead ? CardType.Heads : CardType.Number);
             }
         }
 
-        public Card(CardColorType cardColor, CardValueType cardValue)
+        public Card(CardColor cardColor, CardValue cardValue)
         {
-            CardColor = cardColor;
-            CardValue = cardValue;
+            Color = cardColor;
+            Value = cardValue;
         }
 
         public Card(Random randomGenerator)
         {
-            
-            CardColor = (CardColorType)randomGenerator.Next(1, 5);
-            CardValue = (CardValueType)randomGenerator.Next(2, 15);
+
+            Color = (CardColor)randomGenerator.Next(1, 5);
+            Value = (CardValue)randomGenerator.Next(2, 15);
         }
 
         public override string ToString()
         {
-            return CardValue.ToString() + " of " + CardColor.ToString();
+            return Value.ToString() + " of " + Color.ToString();
         }
 
         public int CompareTo(Card other)
         {
-            if ((int)CardValue - (int)other.CardValue == 0)
+            if ((int)Value == (int)other.Value)
             {
-                return (int)CardColor - (int)other.CardColor;
+                return (int)Color - (int)other.Color;
             }
             else
-                return (int)CardValue - (int)other.CardValue;
+                return (int)Value - (int)other.Value;
         }
     }
 }
