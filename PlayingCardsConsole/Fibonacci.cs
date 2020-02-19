@@ -6,23 +6,30 @@ namespace PlayingCardsConsole
 {
     public static class Fibonacci
     {
-        public static int Fibo(int n)
+        public static BigInteger Fibo(int n)
         {
-            switch (n)
+            if (n < 0)
             {
-                case 0:
-                    {
-                        return 0;
-                    }
-                case 1:
-                    {
-                        return 1;
-                    }
-                default:
-                    {
-                        return Fibo(n - 1) + Fibo(n - 2);
-                    }
+                throw new ArgumentException("Fibo is not defined for negative numbers.", nameof(n));
             }
+
+            if (n == 0)
+            {
+                return 0;
+            }
+
+            BigInteger previous = 0;
+            BigInteger current = 1;
+            checked
+            {
+                for (int i = 1; i < n; i++)
+                {
+                    var next = previous + current;
+                    previous = current;
+                    current = next;
+                }
+            }
+            return current;
         }
     }
 }
