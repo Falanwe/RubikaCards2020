@@ -17,7 +17,7 @@ namespace PlayingCardsConsole
 
             //Console.WriteLine($"First card ({firstCard}) is {(firstCard == secondCard ? "" : "not")} equal to second card ({secondCard}).");
 
-            Console.WriteLine(Fibonacci.Fibo(-11).ToString("N0"));
+            Console.WriteLine(Fibonacci.Fibo(80).ToString("N0"));
         }
     }
 }

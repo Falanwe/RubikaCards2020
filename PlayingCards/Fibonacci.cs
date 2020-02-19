@@ -7,8 +7,8 @@ namespace PlayingCardsConsole
 {
     public class Fibonacci
     {
-        public static List<BigInteger> fibonacciNumbers;
-        public static List<BigInteger> negativefibonacciNumbers;
+        private static List<BigInteger> fibonacciNumbers;
+        private static List<BigInteger> negativefibonacciNumbers;
 
         public static BigInteger Fibo(int n)
         {
