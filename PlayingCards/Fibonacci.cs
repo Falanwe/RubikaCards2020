@@ -1,21 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Numerics;
 
 namespace PlayingCards
 {
     public static class Fibonacci
     {
-        public static long Fibo(int len)
+        public static BigInteger Fibo(int n)
         {
-            long a = 0, b = 1, c = 0;
-            for (int i = 1; i < len; i++)
+            if(n < 0)
             {
-                c = a + b;
-                a = b;
-                b = c;
+                throw new ArgumentException("Fibo is not defined for negative number");
             }
-            return c;
+
+            BigInteger previous = 0;
+            BigInteger current = 1;
+            checked
+            {
+                for (int i = 1; i < n; i++)
+                {
+                    BigInteger next = previous + current;
+                    previous = current;
+                    current = next;
+                }
+            }
+            return current;
         }
     }
 }
