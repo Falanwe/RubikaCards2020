@@ -1,7 +1,8 @@
 ﻿using System;
-using PlayingCards;
 using System.Collections.Generic;
-
+using System.Collections.Concurrent;
+using System.Linq;
+using PlayingCards;
 
 
 namespace PlayingCardsConsole
@@ -27,7 +28,10 @@ namespace PlayingCardsConsole
                 new Card(CardColor.Clubs, CardValue.King)
             });
 
-            Console.Write(Fibonacci.Fibo(80).ToString("NO"));
+            for (var i = 0; true; i++)
+            {
+                Console.WriteLine(Fibonacci.Fibo(i).ToString("N0"));
+            }
         }
     }
 }

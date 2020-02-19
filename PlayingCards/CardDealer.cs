@@ -6,23 +6,19 @@ namespace PlayingCards
 {
     public class CardDealer
     {
+        private Random _rand = new Random();
+
         public void Shuffle()
         {
 
-        }
-
+        }        
 
         public Card DealOne()
         {
-            Random rand = new Random();
             return new Card(
-                (CardColor)rand.Next(0, (int)CardColor.Spades + 1),
-                (CardValue)rand.Next(2, (int)CardValue.Ace + 1)
+                (CardColor)_rand.Next(0, (int)CardColor.Spades + 1),
+                (CardValue)_rand.Next(2, (int)CardValue.Ace + 1)
             );
         }
-
-
     }
-
-
 }
