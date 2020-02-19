@@ -2,6 +2,7 @@
 
 namespace PlayingCards
 {
+
     public enum CardColor
     {
         Clubs,
@@ -9,7 +10,6 @@ namespace PlayingCards
         Hearts,
         Spades
     }
-
     public enum CardValue
     {
         Two = 2,
@@ -50,7 +50,6 @@ namespace PlayingCards
 
         public CardColor Color { get; }
         public CardValue Value { get; }
-
         public CardType Type
         {
             get
@@ -82,16 +81,13 @@ namespace PlayingCards
                 return Color.CompareTo(secondCard.Color);
             }
         }
-
         public override string ToString() => $"{Value} of {Color}";
-
-        public bool Equals(Card other) => CompareTo(other) == 0;
-
         public override int GetHashCode()
         {
             return 4 * (int)Value + (int)Color;
         }
 
+        public bool Equals(Card other) => CompareTo(other) == 0;
         public override bool Equals(object obj)
         {
             var other = obj as Card;
@@ -104,11 +100,8 @@ namespace PlayingCards
                 return false;
             }
         }
-
         public static bool operator ==(Card first, Card second) => object.ReferenceEquals(first, second) || (first?.Equals(second) ?? false);
-
         public static bool operator !=(Card first, Card second) => !(first == second);
-
         public static bool operator >(Card first, Card second)
         {
             if (first == null)
@@ -120,7 +113,6 @@ namespace PlayingCards
                 return first.CompareTo(second) > 0;
             }
         }
-
         public static bool operator <(Card first, Card second)
         {
             if (first == null)
@@ -132,7 +124,6 @@ namespace PlayingCards
                 return first.CompareTo(second) < 0;
             }
         }
-
         public static bool operator >=(Card first, Card second) => !(first < second);
         public static bool operator <=(Card first, Card second) => !(first > second);
     }
