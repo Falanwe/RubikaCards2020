@@ -7,44 +7,54 @@ namespace PlayingCardsConsole
     public class Fibonacci
     {
         public static List<long> fibonacciNumbers;
+        public static List<long> negativefibonacciNumbers;
+
         public static long Fibo(int n)
         {
-            if(fibonacciNumbers == null)
+            if(n>=0)
             {
-                fibonacciNumbers = new List<long>();
-                fibonacciNumbers.Add(0);
-                fibonacciNumbers.Add(1);
-            }
-
-            if(n <= fibonacciNumbers.Count)
-            {
-                return fibonacciNumbers[n];
-            }
-            else if(n>0)
-            {
-                for(int i = fibonacciNumbers.Count; i <= n; i++)
+                if (fibonacciNumbers == null)
                 {
-                    fibonacciNumbers.Add(fibonacciNumbers[i - 2] + fibonacciNumbers[i - 1]);
+                    fibonacciNumbers = new List<long>();
+                    fibonacciNumbers.Add(0);
+                    fibonacciNumbers.Add(1);
                 }
-                return fibonacciNumbers[n];
-            }
-            return 0;
 
-            //switch (n)
-            //{
-            //    case 0:
-            //        {
-            //            return 0;
-            //        }
-            //    case 1:
-            //        {
-            //            return 1;
-            //        }
-            //    default:
-            //        {
-            //            return Fibo(n - 1) + Fibo(n - 2);
-            //        }
-            //}
+                if (n < fibonacciNumbers.Count)
+                {
+                    return fibonacciNumbers[n];
+                }
+                else
+                {
+                    for (int i = fibonacciNumbers.Count; i <= n; i++)
+                    {
+                        fibonacciNumbers.Add(fibonacciNumbers[i - 2] + fibonacciNumbers[i - 1]);
+                    }
+                    return fibonacciNumbers[n];
+                }
+            }
+            else
+            {
+                if (negativefibonacciNumbers == null)
+                {
+                    negativefibonacciNumbers = new List<long>();
+                    negativefibonacciNumbers.Add(1);
+                    negativefibonacciNumbers.Add(0);
+                }
+
+                if (-n < negativefibonacciNumbers.Count - 1)
+                {
+                    return negativefibonacciNumbers[-n + 1];
+                }
+                else
+                {
+                    for (int i = negativefibonacciNumbers.Count; i <= -n + 1; i++)
+                    {
+                        negativefibonacciNumbers.Add(negativefibonacciNumbers[i - 2] - negativefibonacciNumbers[i - 1]);
+                    }
+                    return negativefibonacciNumbers[-n + 1];
+                }
+            }
         }
 
     }
