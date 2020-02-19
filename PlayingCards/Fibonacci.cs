@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Numerics;
 
 namespace PlayingCardsConsole
 {
     public class Fibonacci
     {
-        public static List<long> fibonacciNumbers;
-        public static List<long> negativefibonacciNumbers;
+        public static List<BigInteger> fibonacciNumbers;
+        public static List<BigInteger> negativefibonacciNumbers;
 
-        public static long Fibo(int n)
+        public static BigInteger Fibo(int n)
         {
             if(n>=0)
             {
                 if (fibonacciNumbers == null)
                 {
-                    fibonacciNumbers = new List<long>();
+                    fibonacciNumbers = new List<BigInteger>();
                     fibonacciNumbers.Add(0);
                     fibonacciNumbers.Add(1);
                 }
@@ -37,7 +38,7 @@ namespace PlayingCardsConsole
             {
                 if (negativefibonacciNumbers == null)
                 {
-                    negativefibonacciNumbers = new List<long>();
+                    negativefibonacciNumbers = new List<BigInteger>();
                     negativefibonacciNumbers.Add(1);
                     negativefibonacciNumbers.Add(0);
                 }
