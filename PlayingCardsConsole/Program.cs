@@ -11,7 +11,7 @@ namespace PlayingCardsConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Fibonacci.Fibo(80));
+            Console.WriteLine(Fibonacci.Fibonana(101).ToString("N0"));
         }
     }
 }

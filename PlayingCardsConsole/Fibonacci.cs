@@ -24,5 +24,26 @@ namespace PlayingCardsConsole
                     }
             }
         }
+
+        public static long Fibonana(long n)
+        {
+            long a = 0;
+            long b = 1;
+            long result = 0;
+
+            long repeated = 0;
+
+            while (repeated < (n - 1))
+            {
+                result = (a + b);
+
+                a = b;
+                b = result;
+
+                repeated++;
+            }
+
+            return result;
+        }
     }
 }
