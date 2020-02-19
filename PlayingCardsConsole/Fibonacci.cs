@@ -53,7 +53,21 @@ namespace PlayingCardsConsole
             }
         }
 
-        public static IEnumerable<BigInteger> Sequence() => new FiboEnumerable();
+        public static IEnumerable<BigInteger> Sequence()
+        {
+            BigInteger previous = 0;
+            yield return previous;
+
+            BigInteger current = 1;
+            while(true)
+            {
+                yield return current;
+
+                var next = previous + current;
+                previous = current;
+                current = next;
+            }            
+        }
 
         public static BigInteger Fibo(int n)
         {
@@ -69,15 +83,13 @@ namespace PlayingCardsConsole
 
             BigInteger previous = 0;
             BigInteger current = 1;
-            checked
+            for (int i = 1; i < n; i++)
             {
-                for (int i = 1; i < n; i++)
-                {
-                    var next = previous + current;
-                    previous = current;
-                    current = next;
-                }
+                var next = previous + current;
+                previous = current;
+                current = next;
             }
+
             return current;
         }
     }

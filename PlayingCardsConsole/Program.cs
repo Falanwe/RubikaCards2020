@@ -28,9 +28,11 @@ namespace PlayingCardsConsole
                 new Card(CardColor.Clubs, CardValue.King)
             });
 
+            var count = 0;
             foreach(var fibo in Fibonacci.Sequence())
             {
-                Console.WriteLine(fibo.ToString("N0"));
+                Console.WriteLine($"{count}: {fibo:N0}");
+                count++;
             }
         }
     }
