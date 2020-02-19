@@ -1,11 +1,60 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace PlayingCardsConsole
 {
     public static class Fibonacci
     {
+        private class FiboEnumerable : IEnumerable<BigInteger>
+        {
+            public IEnumerator<BigInteger> GetEnumerator()
+            {
+                return new FiboEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return new FiboEnumerator();
+            }
+        }
+
+        private class FiboEnumerator : IEnumerator<BigInteger>
+        {
+            private int _index = -1;
+            public BigInteger Current
+            {
+                get
+                {
+                    if (_index < 0)
+                    {
+                        throw new InvalidOperationException();
+                    }
+                    return Fibo(_index);
+                }
+            }
+            object IEnumerator.Current => Current;
+
+            public void Dispose()
+            {
+            }
+
+            public bool MoveNext()
+            {
+                _index++;
+                return true;
+            }
+
+            public void Reset()
+            {
+                _index = -1;
+            }
+        }
+
+        public static IEnumerable<BigInteger> Sequence() => new FiboEnumerable();
+
         public static BigInteger Fibo(int n)
         {
             if (n < 0)
@@ -32,4 +81,6 @@ namespace PlayingCardsConsole
             return current;
         }
     }
+
+
 }
