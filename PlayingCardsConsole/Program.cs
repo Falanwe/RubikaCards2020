@@ -7,15 +7,17 @@ namespace PlayingCardsConsole
     {
         static void Main(string[] args)
         {
-            RngGod rng = new RngGod(new Random());
-            var dealer = new CardDealer();
+            //RngGod rng = new RngGod(new Random());
+            //var dealer = new CardDealer();
 
-            dealer.Shuffle();
+            //dealer.Shuffle();
 
-            var firstCard = dealer.DealOne();
-            var secondCard = dealer.DealOne();
+            //var firstCard = dealer.DealOne();
+            //var secondCard = dealer.DealOne();
 
-            Console.WriteLine($"First card ({firstCard}) is {(firstCard == secondCard ? "" : "not")} equal to second card ({secondCard}).");
+            //Console.WriteLine($"First card ({firstCard}) is {(firstCard == secondCard ? "" : "not")} equal to second card ({secondCard}).");
+
+            Console.WriteLine(Fibonacci.Fibo(80).ToString("N0"));
         }
     }
 }
