@@ -25,9 +25,9 @@ namespace PlayingCardsConsole
             }
         }
 
-        public static long Fibo3(long max, long f1 = 0, long f2 = 1, int step = 1)
+        public static long Fibo3(long max, long f1 = 0, long f2 = 1, int step = 2)
         {
-            if (step >= max - 1)
+            if (step >= max)
             {
                 return f1 + f2;
             }
