@@ -16,12 +16,18 @@ namespace PlayingCardsConsole
             var cards = dealer.DealInfinitely().Take(10000).ToList();
 
             Card.ResetComparisonCount();
-            //foreach(var card in sort.Sort(cards))
-            //{
-            //    Console.WriteLine(card);
-            //}
 
-            var b = cards[0] < cards[1];
+            Card previous = null;
+            foreach (var current in sort.Sort(cards))
+            {
+                Console.WriteLine(current);
+                if (!object.ReferenceEquals(previous, null) && previous > current)
+                {
+                    Console.WriteLine($"{previous} is stricly greater than {current} ! Bad sorting!");
+                    break;
+                }
+                previous = current;
+            }
 
             Console.WriteLine($"it took me only {Card.ComparisonCount} comparisons!");
 

@@ -120,7 +120,7 @@ namespace PlayingCards
 
         public static bool operator >(Card first, Card second)
         {
-            if (first == null)
+            if (object.ReferenceEquals(first, null))
             {
                 return false;
             }
