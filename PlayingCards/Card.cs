@@ -2,6 +2,7 @@
 
 namespace PlayingCards
 {
+
     public enum CardColor
     {
         Clubs,
@@ -42,6 +43,13 @@ namespace PlayingCards
 
     public class Card : IComparable<Card>, IEquatable<Card>
     {
+        public static long ComparisonCount { get; private set; } = 0;
+
+        public static void ResetComparisonCount()
+        {
+            ComparisonCount = 0;
+        }
+
         public Card(CardColor color, CardValue value)
         {
             Color = color;
@@ -67,7 +75,8 @@ namespace PlayingCards
 
         public int CompareTo(Card secondCard)
         {
-            if (secondCard == null)
+            ComparisonCount++;
+            if (object.ReferenceEquals(secondCard, null))
             {
                 return 1;
             }
@@ -111,7 +120,7 @@ namespace PlayingCards
 
         public static bool operator >(Card first, Card second)
         {
-            if (first == null)
+            if (object.ReferenceEquals(first, null))
             {
                 return false;
             }
@@ -123,9 +132,9 @@ namespace PlayingCards
 
         public static bool operator <(Card first, Card second)
         {
-            if (first == null)
+            if (object.ReferenceEquals(first, null))
             {
-                return second != null;
+                return !object.ReferenceEquals(second, null);
             }
             else
             {

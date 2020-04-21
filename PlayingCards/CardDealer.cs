@@ -20,5 +20,13 @@ namespace PlayingCards
                 (CardValue)_rand.Next(2, (int)CardValue.Ace + 1)
             );
         }
+
+        public IEnumerable<Card> DealInfinitely()
+        {
+            while(true)
+            {
+                yield return DealOne();
+            }
+        }
     }
 }
