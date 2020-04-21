@@ -76,7 +76,7 @@ namespace PlayingCards
         public int CompareTo(Card secondCard)
         {
             ComparisonCount++;
-            if (secondCard == null)
+            if (object.ReferenceEquals(secondCard, null))
             {
                 return 1;
             }
@@ -132,9 +132,9 @@ namespace PlayingCards
 
         public static bool operator <(Card first, Card second)
         {
-            if (first == null)
+            if (object.ReferenceEquals(first, null))
             {
-                return second != null;
+                return !object.ReferenceEquals(second, null);
             }
             else
             {
