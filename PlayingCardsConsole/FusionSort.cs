@@ -11,14 +11,14 @@ namespace PlayingCardsConsole
     {
         public IEnumerable<T> Sort<T>(IEnumerable<T> source) where T : IComparable<T>
         {
-            if(!source.Skip(1).Any())
+            if (!source.Skip(1).Any())
             {
                 return source;
             }
             else
             {
                 var split = Split(source);
-                return Fusion(Sort(split.first), Sort(split.second));
+                return FusionWithEnumerators(Sort(split.first), Sort(split.second));
             }
         }
 
@@ -30,7 +30,7 @@ namespace PlayingCardsConsole
             return (groups.First(), groups.Last());
         }
 
-        private IEnumerable<T> Fusion<T>(IEnumerable<T> first, IEnumerable<T> second) where T : IComparable<T>
+        private IEnumerable<T> FusionWithEnumerators<T>(IEnumerable<T> first, IEnumerable<T> second) where T : IComparable<T>
         {
             var firstEnumerator = first.GetEnumerator();
             var secondEnumerator = second.GetEnumerator();
@@ -90,6 +90,34 @@ namespace PlayingCardsConsole
                 }
                 while (enumerator.MoveNext());
             }
+        }
+
+        private IEnumerable<T> Fusion<T>(IEnumerable<T> first, IEnumerable<T> second) where T : IComparable<T>
+        {
+            var result = new Queue<T>();
+            var leftQueue = new Queue<T>(first);
+            var rightqueue = new Queue<T>(second);
+            while (leftQueue.Any() && rightqueue.Any())
+            {
+                if (leftQueue.Peek().CompareTo(rightqueue.Peek()) <= 0)
+                {
+                    result.Enqueue(leftQueue.Dequeue());
+                }
+                else
+                {
+                    result.Enqueue(rightqueue.Dequeue());
+                }
+            }
+
+            foreach(var e in leftQueue)
+            {
+                result.Enqueue(e);
+            }
+            foreach (var e in rightqueue)
+            {
+                result.Enqueue(e);
+            }
+            return result;
         }
     }
 }
