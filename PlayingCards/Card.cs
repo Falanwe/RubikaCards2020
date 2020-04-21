@@ -2,6 +2,7 @@
 
 namespace PlayingCards
 {
+
     public enum CardColor
     {
         Clubs,
@@ -42,6 +43,13 @@ namespace PlayingCards
 
     public class Card : IComparable<Card>, IEquatable<Card>
     {
+        public static long ComparisonCount { get; private set; } = 0;
+
+        public static void ResetComparisonCount()
+        {
+            ComparisonCount = 0;
+        }
+
         public Card(CardColor color, CardValue value)
         {
             Color = color;
@@ -67,6 +75,7 @@ namespace PlayingCards
 
         public int CompareTo(Card secondCard)
         {
+            ComparisonCount++;
             if (secondCard == null)
             {
                 return 1;

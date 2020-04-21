@@ -11,29 +11,18 @@ namespace PlayingCardsConsole
     {
         static void Main(string[] args)
         {
+            var sort = new VeryGoodSort();
             var dealer = new CardDealer();
+            var cards = dealer.DealInfinitely().Take(10000).ToList();
 
-            dealer.Shuffle();
-
-            //var firstCard = dealer.DealOne();
-            //var secondCard = dealer.DealOne();
-
-            //Console.WriteLine($"First card ({firstCard}) is {(firstCard > secondCard ? "greater" : "smaller")} than second card ({secondCard}).");
-
-            Dictionary<string, List<Card>> playerHands = new Dictionary<string, List<Card>>();
-
-            playerHands.Add("Alexis", new List<Card>
+            foreach(var card in sort.Sort(cards))
             {
-                new Card(CardColor.Hearts, CardValue.Seven),
-                new Card(CardColor.Clubs, CardValue.King)
-            });
-
-            var count = 0;
-            foreach(var fibo in Fibonacci.Sequence())
-            {
-                Console.WriteLine($"{count}: {fibo:N0}");
-                count++;
+                Console.WriteLine(card);
             }
+
+            Console.WriteLine($"it took me only {Card.ComparisonCount} comparisons!");
+
+            Console.ReadLine();
         }
     }
 }
