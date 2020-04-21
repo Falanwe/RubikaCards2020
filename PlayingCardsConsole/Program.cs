@@ -11,7 +11,7 @@ namespace PlayingCardsConsole
     {
         static void Main(string[] args)
         {
-            ISort sort = new VeryBadSort();
+            ISort sort = new FusionSort();
             var dealer = new CardDealer();
             var cards = dealer.DealInfinitely().Take(10000).ToList();
 
@@ -20,7 +20,7 @@ namespace PlayingCardsConsole
             Card previous = null;
             foreach (var current in sort.Sort(cards))
             {
-                Console.WriteLine(current);
+                //Console.WriteLine(current);
                 if (!object.ReferenceEquals(previous, null) && previous > current)
                 {
                     Console.WriteLine($"{previous} is stricly greater than {current} ! Bad sorting!");

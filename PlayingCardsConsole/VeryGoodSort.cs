@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PlayingCardsConsole
@@ -8,7 +9,7 @@ namespace PlayingCardsConsole
     {
         public IEnumerable<T> Sort<T>(IEnumerable<T> source) where T : IComparable<T>
         {
-            throw new NotImplementedException();
+            return source.OrderBy(t => t);
         }
     }
 }
