@@ -11,7 +11,7 @@ namespace PlayingCardsConsole
     {
         static void Main(string[] args)
         {
-            ISort sort = new VeryBadSort();
+            ISort sort = new SimpleSort();
             var dealer = new CardDealer();
             var cards = dealer.DealInfinitely().Take(10000).ToList();
 

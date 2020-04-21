@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Transactions;
 
@@ -10,8 +11,6 @@ namespace PlayingCardsConsole
         public IEnumerable<T> Sort<T>(IEnumerable<T> source) where T : IComparable<T>
         {
             List<T> sortedList = CopyIEnumerable<T>(source);
-            IEnumerator<T> enumerator = source.GetEnumerator();
-
             ListSort<T>(sortedList);
 
             return sortedList;
@@ -31,22 +30,25 @@ namespace PlayingCardsConsole
 
         private void ListSort<T>(List<T> source) where T : IComparable<T>
         {
-            bool hasChange = false;
-
+            bool hasChange;
+            int iterration = 0;
             do
             {
                 hasChange = false;
                 
-                for(int i = 1; i < source.Count; i++)
+                for(int i = 1; i < source.Count - iterration; i++)
                 {
                     if (source[i].CompareTo(source[i-1]) < 0)
                     {
                         T tempValue = source[i];
                         source[i] = source[i - 1];
                         source[i - 1] = tempValue;
+
                         hasChange = true;
                     }
                 }
+
+                iterration++;
             }
             while (hasChange);
         }
