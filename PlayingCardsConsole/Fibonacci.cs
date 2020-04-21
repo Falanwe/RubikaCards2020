@@ -1,49 +1,98 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace PlayingCardsConsole
 {
     public static class Fibonacci
     {
-        public static int Fibo(int n)
+        private class FiboEnumerable : IEnumerable<BigInteger>
         {
-            switch (n)
+            public IEnumerator<BigInteger> GetEnumerator()
             {
-                case 0:
-                    {
-                        return 0;
-                    }
-                case 1:
-                    {
-                        return 1;
-                    }
-                default:
-                    {
-                        return Fibo(n - 1) + Fibo(n - 2);
-                    }
+                return new FiboEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return new FiboEnumerator();
             }
         }
 
-        public static long Fibonana(long n)
+        private class FiboEnumerator : IEnumerator<BigInteger>
         {
-            long a = 0;
-            long b = 1;
-            long result = 0;
-
-            long repeated = 0;
-
-            while (repeated < (n - 1))
+            private int _index = -1;
+            public BigInteger Current
             {
-                result = (a + b);
+                get
+                {
+                    if (_index < 0)
+                    {
+                        throw new InvalidOperationException();
+                    }
+                    return Fibo(_index);
+                }
+            }
+            object IEnumerator.Current => Current;
 
-                a = b;
-                b = result;
-
-                repeated++;
+            public void Dispose()
+            {
             }
 
-            return result;
+            public bool MoveNext()
+            {
+                _index++;
+                return true;
+            }
+
+            public void Reset()
+            {
+                _index = -1;
+            }
+        }
+
+        public static IEnumerable<BigInteger> Sequence()
+        {
+            BigInteger previous = 0;
+            yield return previous;
+
+            BigInteger current = 1;
+            while(true)
+            {
+                yield return current;
+
+                var next = previous + current;
+                previous = current;
+                current = next;
+            }            
+        }
+
+        public static BigInteger Fibo(int n)
+        {
+            if (n < 0)
+            {
+                throw new ArgumentException("Fibo is not defined for negative numbers.", nameof(n));
+            }
+
+            if (n == 0)
+            {
+                return 0;
+            }
+
+            BigInteger previous = 0;
+            BigInteger current = 1;
+            for (int i = 1; i < n; i++)
+            {
+                var next = previous + current;
+                previous = current;
+                current = next;
+            }
+
+            return current;
         }
     }
+
+
 }

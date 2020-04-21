@@ -11,7 +11,27 @@ namespace PlayingCardsConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Fibonacci.Fibonana(101).ToString("N0"));
+            ISort sort = new VeryBadSort();
+            var dealer = new CardDealer();
+            var cards = dealer.DealInfinitely().Take(10000).ToList();
+
+            Card.ResetComparisonCount();
+
+            Card previous = null;
+            foreach (var current in sort.Sort(cards))
+            {
+                Console.WriteLine(current);
+                if (!object.ReferenceEquals(previous, null) && previous > current)
+                {
+                    Console.WriteLine($"{previous} is stricly greater than {current} ! Bad sorting!");
+                    break;
+                }
+                previous = current;
+            }
+
+            Console.WriteLine($"it took me only {Card.ComparisonCount} comparisons!");
+
+            Console.ReadLine();
         }
     }
 }
