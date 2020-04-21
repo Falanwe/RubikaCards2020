@@ -11,14 +11,17 @@ namespace PlayingCardsConsole
     {
         static void Main(string[] args)
         {
-            ISort sort = new FusionSort();
+            ISort sort = new VeryGoodSort();
             var dealer = new CardDealer();
             var cards = dealer.DealInfinitely().Take(10000).ToList();
 
             Card.ResetComparisonCount();
 
             Card previous = null;
-            foreach (var current in sort.Sort(cards))
+            var sortedCards = sort.Sort(cards);
+
+
+            foreach (var current in sortedCards)
             {
                 //Console.WriteLine(current);
                 if (!object.ReferenceEquals(previous, null) && previous > current)
@@ -30,6 +33,7 @@ namespace PlayingCardsConsole
             }
 
             Console.WriteLine($"it took me only {Card.ComparisonCount} comparisons!");
+
 
             Console.ReadLine();
         }
